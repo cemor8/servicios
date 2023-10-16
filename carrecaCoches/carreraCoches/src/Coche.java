@@ -1,4 +1,5 @@
 import java.time.Duration;
+import java.time.Instant;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Comparator;
@@ -10,21 +11,17 @@ public class Coche extends Thread{
     private String nombre;
     private Double distanciaRecorrida;
     private Integer distanciaCarrera;
-    private int contador=0;
-    public Coche(int veloMaxima, String nombre, Double distanciaRecorrida,Integer distanciaCarrera) {
+    private int participantes;
+
+    public Coche(int veloMaxima, String nombre, Double distanciaRecorrida,Integer distanciaCarrera, int participantes) {
         this.veloMaxima = veloMaxima;
         this.nombre = nombre;
         this.distanciaRecorrida = distanciaRecorrida;
         this.distanciaCarrera=distanciaCarrera;
+        this.participantes=participantes;
+
     }
 
-    public int getVeloMaxima() {
-        return veloMaxima;
-    }
-
-    public Double getDistanciaRecorrida() {
-        return distanciaRecorrida;
-    }
     public void aumentarDistanciaRecorrida(){
         Double numAleatorio= Math.floor(Math.random()*(this.veloMaxima+1));
         this.distanciaRecorrida+=numAleatorio;
@@ -32,8 +29,6 @@ public class Coche extends Thread{
     @Override
     public void run(){
         long horaInicio= System.currentTimeMillis();
-        Date horaInicioFinal=new Date(horaInicio);
-
         while (this.distanciaRecorrida<this.distanciaCarrera){
             this.aumentarDistanciaRecorrida();
             try {
@@ -43,26 +38,12 @@ public class Coche extends Thread{
             }
             System.out.println(this.nombre+" Distancia recorrida: "+this.distanciaRecorrida+" Distancia Carrera: "+this.distanciaCarrera);
         }
-
         long tiempoFinal = System.currentTimeMillis();
-        Date horaFinal = new Date(tiempoFinal);
-        Calendar cal1 = Calendar.getInstance();
-        cal1.setTime(horaInicioFinal);
-        Calendar cal2 = Calendar.getInstance();
-        cal2.setTime(horaFinal);
-        long diferenciaMillis =Math.abs(cal1.getTimeInMillis() - cal2.getTimeInMillis()) ;
-        long horas = TimeUnit.MILLISECONDS.toHours(diferenciaMillis);
-        long minutos = TimeUnit.MILLISECONDS.toMinutes(diferenciaMillis) % 60;
-        long segundos = TimeUnit.MILLISECONDS.toSeconds(diferenciaMillis) % 60;
+        long tiempoRestado=tiempoFinal-horaInicio;
+        long segundos = tiempoRestado / 1000;
+        long minutos = segundos / 60;
+        System.out.println("Cohe: "+this.nombre+" ha acabado: "+(((this.participantes+2)-Thread.activeCount())+1)+" en minutos: "+minutos+" segundos: "+segundos);
 
-        ThreadGroup miGrupo=Thread.currentThread().getThreadGroup();
-        Thread[] hilosEnElGrupo = new Thread[miGrupo.activeCount()];
-
-        Arrays.stream(hilosEnElGrupo).sorted(Comparator<>);
-        System.out.println(miGrupo.enumerate(hilosEnElGrupo));
-
-
-        System.out.println("Coche"+this.nombre+" llega a meta en Horas:"+horas+" Minutos: "+minutos+" Segundos: "+segundos);
 
 
     }
