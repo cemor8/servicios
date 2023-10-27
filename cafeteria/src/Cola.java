@@ -2,41 +2,31 @@ public class Cola {
     private boolean listo=false;
     private Cliente cliente;
 
-    public Cola(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
     public synchronized void setCafe() throws InterruptedException {
-        while (this.listo){
-            wait();
-        }
-        Thread.sleep(5000);
-        this.listo=true;
-        notifyAll();
+            while (this.listo ||this.cliente==null){
+                wait();
+            }
+            System.out.println("Preparando café...");
+            Thread.sleep(5000);
+            this.listo=true;
+            notifyAll();
 
     }
-    public synchronized Cliente getCafe() throws InterruptedException {
-        int tiempoEsperado=0;
-
-        while (!this.listo){
-            System.out.println(tiempoEsperado);
-            tiempoEsperado++;
-            if (tiempoEsperado==this.cliente.getTiempoEspera()){
-                this.cliente=null;
-                this.listo=false;
-                notifyAll();
-                return null;
-            }
-        }
+    public synchronized void getCafe(Cliente cliente) throws InterruptedException {
+        double segundos_iniciar= System.currentTimeMillis();
+        this.cliente=cliente;
         this.listo=false;
         notifyAll();
-        Cliente clienteDevolver=this.cliente;
+        wait(this.cliente.getTiempoEspera());
+        if(!this.listo){
+            System.out.println("el cliente "+cliente.getNombre()+" se va sin su cafe");
+        }else {
+            System.out.println("El cliente "+this.cliente.getNombre()+" ha conseguido su cafe en "+((System.currentTimeMillis()-segundos_iniciar)/1000)+" segundos");
+        }
+        this.listo=false;
         this.cliente=null;
-        return clienteDevolver;
+        notifyAll();
+
 
     }
 

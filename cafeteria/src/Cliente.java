@@ -18,19 +18,12 @@ public class Cliente extends Thread {
     }
 
     @Override
-    public void run() {
-        Cliente clienteConseguido;
-        double segundos_iniciar= System.currentTimeMillis();
+    public synchronized void run() {
         try {
-             clienteConseguido=this.cola.getCafe();
+             this.cola.getCafe(this);
         } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+
         }
-        if(clienteConseguido==null){
-            System.out.println("El cliente "+this.nombre+" no ha conseguido su cafe y se va");
-            return;
-        }
-        System.out.println("El cliente "+this.nombre+" ha conseguido su cafe en "+((System.currentTimeMillis()-segundos_iniciar)/1000)+" segundos");
 
 
     }

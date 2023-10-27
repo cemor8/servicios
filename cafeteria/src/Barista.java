@@ -4,13 +4,20 @@ public class Barista extends Thread{
     public Barista(Cola cola) {
         this.cola = cola;
     }
+
     @Override
-    public void run(){
-        try {
-            this.cola.setCafe();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+    public  void run(){
+        while (true){
+            try {
+                this.cola.setCafe();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
+
+
+
+
     }
 
 
