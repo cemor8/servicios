@@ -18,7 +18,7 @@ public class Cliente extends Thread {
     }
 
     @Override
-    public synchronized void run() {
+    public void run() {
         try {
              this.cola.getCafe(this);
         } catch (InterruptedException e) {
