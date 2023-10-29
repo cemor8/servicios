@@ -10,16 +10,12 @@ public class Cliente extends Thread {
         this.cola = cola;
     }
 
-    public int getTiempoEspera() {
-        return tiempoEspera;
-    }
-
     public String getNombre() {
         return nombre;
     }
 
     @Override
-    public void run() {
+    public synchronized void run() {
         try {
             double timepoInicio= System.currentTimeMillis();
             System.out.println(nombre + " ha llegado a la cafetería.");
