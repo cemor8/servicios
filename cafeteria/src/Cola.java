@@ -1,33 +1,20 @@
-public class Cola {
-    private boolean listo=false;
-    private Cliente cliente;
+import java.util.ArrayList;
 
-    public synchronized void setCafe() throws InterruptedException {
-            while (this.listo ||this.cliente==null){
-                wait();
-            }
-            System.out.println("Preparando café...");
-            Thread.sleep(5000);
-            this.listo=true;
-            notifyAll();
+class Cola {
+    private ArrayList<Cliente> clientesEnCola = new ArrayList<>();
 
+    public synchronized void agregarCliente(Cliente cliente) {
+        this.clientesEnCola.add(cliente);
+        notifyAll();
     }
-    public synchronized void getCafe(Cliente cliente) throws InterruptedException {
-        double segundos_iniciar= System.currentTimeMillis();
-        this.cliente=cliente;
-        this.listo=false;
-        notifyAll();
-        wait(this.cliente.getTiempoEspera());
-        if(!this.listo){
-            System.out.println("el cliente "+cliente.getNombre()+" se va sin su cafe");
-        }else {
-            System.out.println("El cliente "+this.cliente.getNombre()+" ha conseguido su cafe en "+((System.currentTimeMillis()-segundos_iniciar)/1000)+" segundos");
+
+    public synchronized Cliente obtenerCliente() throws InterruptedException {
+        while (this.clientesEnCola.isEmpty()) {
+            wait();
         }
-        this.listo=false;
-        this.cliente=null;
-        notifyAll();
-
-
+        Cliente cliente=this.clientesEnCola.get(0);
+        this.clientesEnCola.remove(this.clientesEnCola.get(0));
+        return cliente;
     }
 
 }

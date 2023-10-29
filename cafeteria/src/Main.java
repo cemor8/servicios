@@ -6,10 +6,10 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
 
         Cola cola=new Cola();
-        Cliente cliente=new Cliente("prueba",100000,cola);
+        Cliente cliente=new Cliente("prueba",9000,cola);
         Barista barista=new Barista(cola);
         Cliente cliente2=new Cliente("prueba5t3",4000,cola);
-        Cliente cliente3=new Cliente("prueba2",6000,cola);
+        Cliente cliente3=new Cliente("prueba2",9000,cola);
         barista.start();
         cliente.start();
         cliente2.start();
