@@ -19,7 +19,7 @@ public class Cliente extends Thread {
     }
 
     @Override
-    public synchronized void run() {
+    public void run() {
         try {
             double timepoInicio= System.currentTimeMillis();
             System.out.println(nombre + " ha llegado a la cafetería.");
