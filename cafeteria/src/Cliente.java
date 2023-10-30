@@ -29,15 +29,15 @@ public class Cliente extends Thread {
     @Override
     public synchronized void run() {
         try {
-            Thread.sleep(tiempoLlegada);
+            Thread.sleep(this.tiempoLlegada);
             double timepoInicio= System.currentTimeMillis();
-            System.out.println(nombre + " ha llegado a la cafetería.\n");
+            System.out.println(this.nombre + " ha llegado a la cafetería.\n");
             this.cola.agregarCliente(this);
-            wait(tiempoEspera);
-            if (!haRecibidoCafe) {
-                System.out.println(nombre + " se ha ido de la cafetería.\n");
+            wait(this.tiempoEspera);
+            if (!this.haRecibidoCafe) {
+                System.out.println(this.nombre + " se ha ido de la cafetería.\n");
             }else {
-                System.out.println(nombre + " ha recibido su café en "+((System.currentTimeMillis()-timepoInicio)/1000)+" segundos\n");
+                System.out.println(this.nombre + " ha recibido su café en "+((System.currentTimeMillis()-timepoInicio)/1000)+" segundos\n");
             }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
@@ -48,7 +48,7 @@ public class Cliente extends Thread {
      * a que este ha recibido el café, luego le notifica al cliente que puede dejar de esperar.
      * */
     public synchronized void recibirCafe() {
-        haRecibidoCafe = true;
+        this.haRecibidoCafe = true;
         notifyAll();
     }
 }
