@@ -10,7 +10,7 @@ public class Barista extends Thread{
         while (true) {
             try {
                 Cliente cliente = this.cola.obtenerCliente();
-                System.out.println("Barista está preparando café para " + cliente.getNombre());
+                System.out.println("Barista está preparando café para " + cliente.getNombre()+"\n");
                 prepararCafe(cliente);
 
             } catch (InterruptedException e) {
@@ -21,7 +21,7 @@ public class Barista extends Thread{
     public void prepararCafe(Cliente cliente) throws InterruptedException {
         Thread.sleep(2000);
         cliente.recibirCafe();
-        System.out.println("cafe acabado para cliente "+cliente.getNombre());
+        System.out.println("cafe acabado para cliente "+cliente.getNombre()+"\n");
     }
 
 
