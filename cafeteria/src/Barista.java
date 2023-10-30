@@ -1,8 +1,10 @@
 public class Barista extends Thread{
     private Cola cola;
+    private String nombre;
 
-    public Barista(Cola cola) {
+    public Barista(Cola cola,String nombre) {
         this.cola = cola;
+        this.nombre=nombre;
     }
     /**
      * El barista esta a la espera de que llegue un cliente, cuando llega uno, este lo obtiene mediante
@@ -14,7 +16,7 @@ public class Barista extends Thread{
         while (true) {
             try {
                 Cliente cliente = this.cola.obtenerCliente();
-                System.out.println("Barista está preparando café para " + cliente.getNombre()+"\n");
+                System.out.println("Barista "+this.nombre+" está preparando café para " + cliente.getNombre()+"\n");
                 prepararCafe(cliente);
 
             } catch (InterruptedException e) {
