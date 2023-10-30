@@ -16,6 +16,16 @@ public class Cliente extends Thread {
         return nombre;
     }
 
+    public int getTiempoEspera() {
+        return tiempoEspera;
+    }
+    /**
+     * Método que se encarga de simular la llegada de un cliente a la cafetería. Este llegará en un momento aleatorio, por lo
+     * que se pausará la ejecucion del hilo hasta que este llegue, se registra la hora de llegada y se indica por pantalla, luego
+     * se asigna a la lista de la cola y se pone a esperar el café. En el momento en el que el café este listo, este será notificado e
+     * imprimirá por pantalla cuanto tiempo le ha llevado conseguir el café. Si espera y no consigue su café a tiempo, este se irá de la
+     * cafetería.
+     * */
     @Override
     public synchronized void run() {
         try {
@@ -33,6 +43,10 @@ public class Cliente extends Thread {
             Thread.currentThread().interrupt();
         }
     }
+    /**
+     * Método que se encarga de cambiar el valor del atributo haRecibidoCafe del cliente a true, debido
+     * a que este ha recibido el café, luego le notifica al cliente que puede dejar de esperar.
+     * */
     public synchronized void recibirCafe() {
         haRecibidoCafe = true;
         notifyAll();
