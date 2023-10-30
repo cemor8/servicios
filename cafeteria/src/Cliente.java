@@ -27,22 +27,20 @@ public class Cliente extends Thread {
      * cafetería.
      * */
     @Override
-    public synchronized void run() {
+    public void run() {
         try {
             Thread.sleep(this.tiempoLlegada);
-            double timepoInicio= System.currentTimeMillis();
             System.out.println(this.nombre + " ha llegado a la cafetería.\n");
             this.cola.agregarCliente(this);
-            wait(this.tiempoEspera);
-            if (!this.haRecibidoCafe) {
-                System.out.println(this.nombre + " se ha ido de la cafetería.\n");
-            }else {
-                System.out.println(this.nombre + " ha recibido su café en "+((System.currentTimeMillis()-timepoInicio)/1000)+" segundos\n");
-            }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
     }
+
+    public boolean isHaRecibidoCafe() {
+        return haRecibidoCafe;
+    }
+
     /**
      * Método que se encarga de cambiar el valor del atributo haRecibidoCafe del cliente a true, debido
      * a que este ha recibido el café, luego le notifica al cliente que puede dejar de esperar.
