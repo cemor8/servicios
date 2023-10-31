@@ -13,6 +13,7 @@ public class Barista extends Thread{
      * */
     @Override
     public void run(){
+
         while (true) {
             try {
                 Cliente cliente = this.cola.obtenerCliente();
@@ -24,15 +25,17 @@ public class Barista extends Thread{
             }
         }
     }
-    /**
-     * Método que se encarga de la simulación de la preparación de un cafe mediante un sleep.
-     * Cuando el café se acaba de preparar, este es entregado al cliente
-     * */
+
     public void prepararCafe(Cliente cliente) throws InterruptedException {
-        Thread.sleep((int) Math.floor(Math.random()*(cliente.getTiempoEspera()-2000))+1000);
-        cliente.recibirCafe();
-        System.out.println("cafe acabado para "+cliente.getNombre()+"\n");
+
+        System.out.println("cafe acabado para "+cliente.getNombre());
+        Thread.sleep(5000);
+
+            cliente.setHaRecibidoCafe();
+
+
     }
+
 
 
 }

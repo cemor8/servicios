@@ -8,15 +8,12 @@ class Cola {
      * @param cliente cliente que ha llegado a la cafeteria
      * */
     public synchronized void agregarCliente(Cliente cliente) throws InterruptedException {
-        double timepoInicio= System.currentTimeMillis();
+        System.out.println(cliente.getNombre() + " ha llegado a la cafetería.\n");
         this.clientesEnCola.add(cliente);
         notifyAll();
-        wait(cliente.getTiempoEspera());
-        if (!cliente.isHaRecibidoCafe()) {
-            System.out.println(cliente.getNombre() + " se ha ido de la cafetería.\n");
-        }else {
-            System.out.println(cliente.getNombre() + " ha recibido su café en "+((System.currentTimeMillis()-timepoInicio)/1000)+" segundos\n");
-        }
+
+
+
     }
     /**
      * Método que se encarga de devolver un cliente y sacarlo de la lista para que el barista
@@ -26,9 +23,11 @@ class Cola {
         while (this.clientesEnCola.isEmpty()) {
             wait();
         }
+       // System.out.println("emepze");
         Cliente cliente=this.clientesEnCola.get(0);
         this.clientesEnCola.remove(this.clientesEnCola.get(0));
         return cliente;
     }
+
 
 }

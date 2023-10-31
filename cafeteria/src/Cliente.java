@@ -3,22 +3,16 @@ public class Cliente extends Thread {
     private int tiempoEspera;
     private Cola cola;
     private boolean haRecibidoCafe = false;
-    private int tiempoLlegada;
-
-    public Cliente(String nombre, int tiempoEspera, Cola cola, int tiempoLlegada) {
+    public Cliente(String nombre, int tiempoEspera, Cola cola) {
         this.nombre = nombre;
         this.tiempoEspera = tiempoEspera;
         this.cola = cola;
-        this.tiempoLlegada=tiempoLlegada;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public int getTiempoEspera() {
-        return tiempoEspera;
-    }
     /**
      * Método que se encarga de simular la llegada de un cliente a la cafetería. Este llegará en un momento aleatorio, por lo
      * que se pausará la ejecucion del hilo hasta que este llegue, se registra la hora de llegada y se indica por pantalla, luego
@@ -29,24 +23,28 @@ public class Cliente extends Thread {
     @Override
     public void run() {
         try {
-            Thread.sleep(this.tiempoLlegada);
-            System.out.println(this.nombre + " ha llegado a la cafetería.\n");
-            this.cola.agregarCliente(this);
+            long timepoInicio= System.currentTimeMillis();
+
+            synchronized (this){
+                this.cola.agregarCliente(this);
+                wait(this.tiempoEspera);
+                if (!this.haRecibidoCafe) {
+                    System.out.println(this.nombre + " se ha ido de la cafetería.\n");
+                }else{System.out.println(this.nombre + " ha recibido su café en " + ((System.currentTimeMillis() - timepoInicio) / 1000) + " segundos\n");
+
+                }
+            }
+
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
     }
 
-    public boolean isHaRecibidoCafe() {
-        return haRecibidoCafe;
-    }
-
-    /**
-     * Método que se encarga de cambiar el valor del atributo haRecibidoCafe del cliente a true, debido
-     * a que este ha recibido el café, luego le notifica al cliente que puede dejar de esperar.
-     * */
-    public synchronized void recibirCafe() {
+    public synchronized void setHaRecibidoCafe() {
+        System.out.println("cafe entregado");
         this.haRecibidoCafe = true;
         notifyAll();
+
     }
+
 }
