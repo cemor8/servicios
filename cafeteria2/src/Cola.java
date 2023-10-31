@@ -8,7 +8,14 @@ public class Cola {
         long tiempoInicio = System.currentTimeMillis();
         this.clientes.add(cliente);
         notifyAll();
-        wait(cliente.getTiempoEspera());
+        int segundosEsperar = cliente.getTiempoEspera()/1000;
+
+        for (int i = 0; i < segundosEsperar; i++) {
+
+            Thread.sleep(1000);
+
+        }
+
         if (cliente.isHaRecibidoCafe()){
             System.out.println(cliente.getNombre()+" recibio el cafe en "+(System.currentTimeMillis()-tiempoInicio)/1000+" segundos");
         }else {
