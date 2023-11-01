@@ -6,16 +6,12 @@ public class Cola {
     public synchronized void meterCliente(Cliente cliente) throws InterruptedException {
         System.out.println(cliente.getNombre()+" llego a la cola ");
         long tiempoInicio = System.currentTimeMillis();
+        cliente.setHoraLlegada(tiempoInicio);
         this.clientes.add(cliente);
         notifyAll();
-        int segundosEsperar = cliente.getTiempoEspera()/1000;
-
-        for (int i = 0; i < segundosEsperar; i++) {
-
-            Thread.sleep(1000);
-
+        while (!cliente.isListo()){
+            wait();
         }
-
         if (cliente.isHaRecibidoCafe()){
             System.out.println(cliente.getNombre()+" recibio el cafe en "+(System.currentTimeMillis()-tiempoInicio)/1000+" segundos");
         }else {
@@ -29,14 +25,10 @@ public class Cola {
         }
         Cliente cliente=this.clientes.get(0);
         this.clientes.remove(this.clientes.get(0));
-        System.out.println("Se empieza a preparar cafe para "+cliente.getNombre());
-        Thread.sleep(4000);
-        System.out.println("cafe preparado para "+cliente.getNombre());
-        cliente.setHaRecibidoCafe();
-        notifyAll();
         return cliente;
-
-
+    }
+    public synchronized void avisarCliente(){
+        notifyAll();
     }
 
 }

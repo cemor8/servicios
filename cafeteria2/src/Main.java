@@ -1,23 +1,29 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) throws InterruptedException {
         Cola cola=new Cola();
-        Cliente cliente=new Cliente("Carlos",7000,cola);
-        Barista barista=new Barista(cola,"jose");
-        Barista barista2=new Barista(cola,"alberto");
-        Cliente cliente2=new Cliente("Oscar",0,cola);
-        Cliente cliente3=new Cliente("Pepe",9000,cola);
-        Cliente cliente4=new Cliente("Juan",1,cola);
-        Cliente cliente5=new Cliente("Alvaro",9000,cola);
-        barista.start();
-        barista2.start();
-        cliente.start();
-        cliente2.start();
-        Thread.sleep((int) Math.floor(Math.random()*2000)+1);
-        cliente3.start();
-        Thread.sleep((int) Math.floor(Math.random()*2000)+1);
-        cliente4.start();
-        Thread.sleep((int) Math.floor(Math.random()*2000)+1);
-        cliente5.start();
+        ArrayList<Barista>baristas=new ArrayList<>(List.of(
+                new Barista(cola,"jose"),
+                new Barista(cola,"alberto")
+        ));
+        ArrayList<Cliente> clientes=new ArrayList<>(List.of(
+                new Cliente("Carlos",7000,cola),
+                new Cliente("Oscar",1000,cola),
+                new Cliente("Pepe",4500,cola),
+                new Cliente("Juan",500,cola),
+                new Cliente("Alvaro",6000,cola)
+        ));
+        Barista.modificarVariableEstatica(clientes.size());
+        for (Barista barista: baristas){
+            barista.start();
+        }
+        for (Cliente cliente : clientes){
+             cliente.start();
+        }
+
+
 
     }
 }
