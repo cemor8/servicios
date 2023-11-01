@@ -9,7 +9,7 @@ public class Barista extends Thread {
     }
     @Override
     public void run(){
-        while (cantidad>0){
+        while (cantidad>1){
             try {
                Cliente cliente=this.cola.obtenerCliente();
                this.preprararCafe(cliente);
@@ -18,6 +18,7 @@ public class Barista extends Thread {
             }
             modificarVariableEstatica(cantidad-=1);
         }
+
     }
     public void preprararCafe(Cliente cliente) throws InterruptedException {
         System.out.println("Se empieza a preparar cafe para "+cliente.getNombre()+" por el barista "+this.nombre);

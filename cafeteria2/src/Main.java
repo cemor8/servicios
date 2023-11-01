@@ -22,8 +22,5 @@ public class Main {
         for (Cliente cliente : clientes){
              cliente.start();
         }
-
-
-
     }
 }
