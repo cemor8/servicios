@@ -7,6 +7,10 @@ public class Barista extends Thread {
         this.cola = cola;
         this.nombre = nombre;
     }
+    /**
+     * Método que se encarga de que los baristas produzcan el café
+     * para los clientes que lleguen a la tienda.
+     * */
     @Override
     public void run(){
         while (cantidad>1){
@@ -20,6 +24,10 @@ public class Barista extends Thread {
         }
 
     }
+    /**
+     * Método que simula la preparacion del cafe, comprueba que el cliente tenga tiempo para recibirlo,
+     * si no lo tiene le dice que se vaya y si lo tiene, lo prepara y luego se lo manda.
+     * */
     public void preprararCafe(Cliente cliente) throws InterruptedException {
         System.out.println("Se empieza a preparar cafe para "+cliente.getNombre()+" por el barista "+this.nombre);
         int timepo_realizacion=4000;

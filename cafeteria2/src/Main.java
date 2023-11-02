@@ -13,7 +13,8 @@ public class Main {
                 new Cliente("Oscar",1000,cola),
                 new Cliente("Pepe",4500,cola),
                 new Cliente("Juan",500,cola),
-                new Cliente("Alvaro",6000,cola)
+                new Cliente("Alvaro",6000,cola),
+                new Cliente("Alvaro2",6000,cola)
         ));
         Barista.modificarVariableEstatica(clientes.size());
         for (Barista barista: baristas){

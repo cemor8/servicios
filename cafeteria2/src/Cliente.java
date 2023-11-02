@@ -12,7 +12,10 @@ public class Cliente extends Thread{
         this.cola=cola;
     }
 
-
+    /**
+     * Método que se encarga de simular la llegada de un cliente a la cafeteria,
+     * llega en un tiempo random y luego pide un cafe.
+     * */
     @Override
     public  void run(){
         try {
