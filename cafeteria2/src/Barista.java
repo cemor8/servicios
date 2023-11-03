@@ -13,14 +13,15 @@ public class Barista extends Thread {
      * */
     @Override
     public void run(){
-        while (cantidad>1){
+        while (cantidad>0){
+            modificarVariableEstatica(cantidad-=1);
             try {
                Cliente cliente=this.cola.obtenerCliente();
                this.preprararCafe(cliente);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            modificarVariableEstatica(cantidad-=1);
+
         }
 
     }
