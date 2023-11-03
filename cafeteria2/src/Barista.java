@@ -9,7 +9,8 @@ public class Barista extends Thread {
     }
     /**
      * Método que se encarga de que los baristas produzcan el café
-     * para los clientes que lleguen a la tienda.
+     * para los clientes que lleguen a la tienda. Mientras no se hayan atendido
+     * a todos los clientes, el barista seguirá atendiendo.
      * */
     @Override
     public void run(){
@@ -31,7 +32,7 @@ public class Barista extends Thread {
      * */
     public void preprararCafe(Cliente cliente) throws InterruptedException {
         System.out.println("Se empieza a preparar cafe para "+cliente.getNombre()+" por el barista "+this.nombre);
-        int timepo_realizacion=4000;
+        int timepo_realizacion=(int) Math.floor(Math.random()*3000)+1000;
         if((System.currentTimeMillis()- cliente.getHoraLlegada())+timepo_realizacion>cliente.getTiempoEspera()){
             cliente.setListo(true);
             this.cola.avisarCliente();
