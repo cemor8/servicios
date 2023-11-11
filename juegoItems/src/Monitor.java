@@ -44,7 +44,6 @@ public class Monitor {
      * cuando todas las zonas hayan acabado, se calculara
      * */
     public synchronized void esperarZonas(Zona zona){
-        System.out.println("esperando");
         notifyAll();
         while (!zona.getListaItems().isEmpty()) {
             try {
@@ -54,7 +53,7 @@ public class Monitor {
             }
 
         }
-        System.out.println("acabe");
+        zona.setTerminada(true);
         this.zonasTerminadas++;
         if(zonasTerminadas==numeroZonas){
             this.calcularLadder();

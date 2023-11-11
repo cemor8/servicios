@@ -80,4 +80,8 @@ public class Zona extends Thread{
     public int getNumeroDeZona() {
         return numeroDeZona;
     }
+
+    public void setTerminada(boolean terminada) {
+        this.terminada = terminada;
+    }
 }
