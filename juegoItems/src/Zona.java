@@ -34,15 +34,15 @@ public class Zona extends Thread{
         for(int i = 0 ;i<this.itemsAGenerar;i++){
             double aleatorio = Math.random();
             if(aleatorio<0.3){
-                aleatorio = Math.floor( Math.random() * 200);
+                aleatorio = Math.floor(Math.random() * 200)+1;
                 Espada espada=new Espada("espada en estado "+descripcionesItems.get((int) (Math.random() * descripcionesItems.size())),aleatorio);
                 this.listaItems.add(espada);
             }else if(aleatorio<0.6){
-                aleatorio = Math.floor( Math.random() * 50);
+                aleatorio = Math.floor( Math.random() * 50)+1;
                 Pechera pechera=new Pechera("pechera en estado "+descripcionesItems.get((int) (Math.random() * descripcionesItems.size())),aleatorio);
                 this.listaItems.add(pechera);
             }else{
-                aleatorio = Math.floor( Math.random() * 25);
+                aleatorio = Math.floor( Math.random() * 25)+1;
                 Casco casco=new Casco("casco en estado "+descripcionesItems.get((int) (Math.random() * descripcionesItems.size())),aleatorio);
                 this.listaItems.add(casco);
             }

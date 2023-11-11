@@ -35,7 +35,6 @@ public class Monitor {
         }
         Item item=personaje.getZonaAsignada().getListaItems().get(0);
         personaje.getZonaAsignada().getListaItems().remove(item);
-        notifyAll();
         Collections.shuffle(personaje.getZonaAsignada().getListaItems());
         return item;
 
@@ -45,6 +44,8 @@ public class Monitor {
      * cuando todas las zonas hayan acabado, se calculara
      * */
     public synchronized void esperarZonas(Zona zona){
+        System.out.println("esperando");
+        notifyAll();
         while (!zona.getListaItems().isEmpty()) {
             try {
                 wait();
@@ -53,6 +54,7 @@ public class Monitor {
             }
 
         }
+        System.out.println("acabe");
         this.zonasTerminadas++;
         if(zonasTerminadas==numeroZonas){
             this.calcularLadder();
@@ -65,5 +67,8 @@ public class Monitor {
     private void calcularLadder(){
         Clasificacion clasificacion=new Clasificacion();
         clasificacion.calcularResultado(this.mapa);
+    }
+    public synchronized void despertar(){
+        notifyAll();
     }
 }

@@ -33,6 +33,7 @@ public class Personaje extends Thread{
                             this.itemPechera = pechera;
                     default -> System.out.println("El item es peor y "+this.nombre+" lo tira a la basura");
                 }
+                this.monitor.despertar();
             }catch (InterruptedException err){
                 System.out.println(err.getMessage());
             }
