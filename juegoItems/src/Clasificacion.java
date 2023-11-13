@@ -22,7 +22,7 @@ public class Clasificacion {
         System.out.println("\n");
         System.out.println("---------Clasificación-----------");
         for (Personaje personaje : todosPersonajes){
-            System.out.println(personaje.getNombre()+" de la zona "+personaje.getZonaAsignada().getNumeroDeZona()+" puntuación: "+personaje.getTotal());
+            System.out.println(todosPersonajes.indexOf(personaje)+1+" :" +personaje.getNombre()+" de la zona "+personaje.getZonaAsignada().getNumeroDeZona()+" puntuación: "+personaje.getTotal());
         }
     }
 }
