@@ -1,5 +1,5 @@
 public class Pechera extends Item{
-    public Pechera(String nombre, double ataque) {
+    public Pechera(String nombre, int ataque) {
         super(nombre, ataque);
     }
 }

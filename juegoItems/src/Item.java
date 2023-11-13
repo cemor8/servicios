@@ -1,8 +1,8 @@
 public class Item {
     private String nombre;
-    private double ataque;
+    private int ataque;
 
-    public Item(String nombre, double ataque) {
+    public Item(String nombre, int ataque) {
         this.nombre = nombre;
         this.ataque = ataque;
     }
@@ -11,7 +11,7 @@ public class Item {
         return nombre;
     }
 
-    public double getAtaque() {
+    public int getAtaque() {
         return ataque;
     }
 }

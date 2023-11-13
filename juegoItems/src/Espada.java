@@ -1,5 +1,5 @@
 public class Espada extends Item{
-    public Espada(String nombre, double ataque) {
+    public Espada(String nombre, int ataque) {
         super(nombre, ataque);
     }
 }

@@ -42,8 +42,8 @@ public class Personaje extends Thread{
     /**
      * Método que devuelve el daño total de un personaje.
      * */
-    public double getTotal(){
-        double total=0;
+    public int getTotal(){
+        int total=0;
         if(this.itemEspada!=null){
             total+=this.itemEspada.getAtaque();
         }else if(this.itemCasco!=null){
