@@ -33,6 +33,7 @@ public class Monitor {
         }catch (InterruptedException err){
             System.out.println(err.getMessage());
         }
+        Collections.shuffle(personaje.getZonaAsignada().getListaItems());
         Item item=personaje.getZonaAsignada().getListaItems().get(0);
         personaje.getZonaAsignada().getListaItems().remove(item);
         Collections.shuffle(personaje.getZonaAsignada().getListaItems());

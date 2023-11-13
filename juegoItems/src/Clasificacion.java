@@ -19,8 +19,10 @@ public class Clasificacion {
             }
         }
         Collections.sort(todosPersonajes,Comparator.comparing(personaje -> personaje.getTotal(),Comparator.reverseOrder()));
+        System.out.println("\n");
+        System.out.println("---------Clasificación-----------");
         for (Personaje personaje : todosPersonajes){
-            System.out.println(personaje.getNombre()+" "+personaje.getTotal());
+            System.out.println(personaje.getNombre()+" de la zona "+personaje.getZonaAsignada().getNumeroDeZona()+" puntuación: "+personaje.getTotal());
         }
     }
 }

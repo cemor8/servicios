@@ -23,7 +23,7 @@ public class Personaje extends Thread{
                 if(item==null){
                     break;
                 }
-                System.out.println("A "+this.nombre+" de la Zona "+this.getZonaAsignada().getNumeroDeZona() +" se le aparece "+item.getNombre());
+                System.out.println("\n A "+this.nombre+" de la Zona "+this.getZonaAsignada().getNumeroDeZona() +" se le aparece "+item.getNombre());
                 switch (item) {
                     case Casco casco when (this.itemCasco == null || this.itemCasco.getAtaque() < item.getAtaque()) ->
                             this.itemCasco = casco;
@@ -31,7 +31,7 @@ public class Personaje extends Thread{
                             this.itemEspada = espada;
                     case Pechera pechera when (this.itemPechera == null || this.itemPechera.getAtaque() < item.getAtaque()) ->
                             this.itemPechera = pechera;
-                    default -> System.out.println("El item es peor y "+this.nombre+" lo tira a la basura");
+                    default -> System.out.println("\n El item es peor y "+this.nombre+" lo tira a la basura");
                 }
                 this.monitor.despertar();
             }catch (InterruptedException err){
