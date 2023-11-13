@@ -57,14 +57,14 @@ public class Monitor {
         zona.setTerminada(true);
         this.zonasTerminadas++;
         if(zonasTerminadas==numeroZonas){
-            this.calcularLadder();
+            this.calcularClasificacion();
         }
 
     }
     /**
      * Método que se encarga de calcular la clasificación de un mapa.
      * */
-    private void calcularLadder(){
+    private void calcularClasificacion(){
         Clasificacion clasificacion=new Clasificacion();
         clasificacion.calcularResultado(this.mapa);
     }
