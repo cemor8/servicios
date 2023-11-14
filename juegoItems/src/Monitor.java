@@ -4,12 +4,11 @@ import java.util.Collections;
 import java.util.List;
 
 public class Monitor {
-    private int numeroZonas;
+    private static int numeroZonas;
     private int zonasTerminadas=0;
     private Mapa mapa;
 
-    public Monitor(int numeroZonas,Mapa mapa) {
-        this.numeroZonas = numeroZonas;
+    public Monitor(Mapa mapa) {
         this.mapa=mapa;
     }
     /**
@@ -55,8 +54,8 @@ public class Monitor {
 
         }
         zona.setTerminada(true);
-        this.zonasTerminadas++;
-        if(zonasTerminadas==numeroZonas){
+        numeroZonas--;
+        if(numeroZonas<=0){
             this.calcularClasificacion();
         }
 
@@ -70,5 +69,8 @@ public class Monitor {
     }
     public synchronized void despertar(){
         notifyAll();
+    }
+    public static void setNumeroDeZonas(int num){
+        numeroZonas=num;
     }
 }

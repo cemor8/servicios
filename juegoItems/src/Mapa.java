@@ -9,10 +9,12 @@ public class Mapa {
      * */
     public void empezar(){
         int numeroZonas = this.pedirInteger("Introduce el numero de zonas para el mapa");
-        Monitor monitor=new Monitor(numeroZonas,this);
+
         Integer itemsXzona=this.pedirInteger("Introduce numero de items por zona a crear");
         Integer personajesXzona=this.pedirInteger("Introduce numero de personajes por zona a crear");
+        Monitor.setNumeroDeZonas(numeroZonas);
         for(int i = 0; i< numeroZonas; i++){
+            Monitor monitor=new Monitor(this);
             Zona zona = new Zona(new ArrayList<>(),itemsXzona,monitor,personajesXzona,i+1);
             this.zonas.add(zona);
             zona.start();
