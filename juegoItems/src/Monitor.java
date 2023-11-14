@@ -5,7 +5,6 @@ import java.util.List;
 
 public class Monitor {
     private static int numeroZonas;
-    private int zonasTerminadas=0;
     private Mapa mapa;
 
     public Monitor(Mapa mapa) {
