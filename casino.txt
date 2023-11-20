@@ -1,0 +1,29 @@
+casino:
+
+ruleta francesa
+
+1 jugador de verdad - consola vs hilos
+
+
+la banca- le da la ruleta y lase un numero - x dinero
+
+jugadores con dinero
+
+-cada x tiempo una tirada, tiempo para decidir nuestra apuesta, si pasa ese tiempo, no apostamos esa ronda.
+
+- numeros del 1 al 36 - solo 1 por vez
+
+- podemos apostar a numeros, si sale, ganamos lo que hemos apostado por x36
+
+
+podemos apostar par/imar-x2
+
+podemos apostar negro/rojo
+
+podemos apostar del 1-18 o del 19-36 - x2
+
+solo puedes apostar si tienes dinero
+
+-pasar se pueden pasar
+
+si sale 0 se queda el dinero la banca
