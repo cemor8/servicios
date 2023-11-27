@@ -39,4 +39,7 @@ public class Ruleta {
     public void setLista(boolean lista) {
         this.lista = lista;
     }
+    public Numero tirarRule(){
+        return this.listaNumeros.get((int) Math.floor(Math.random()*this.listaNumeros.size()));
+    }
 }

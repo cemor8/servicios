@@ -13,7 +13,7 @@ public class Banca extends Thread{
         System.out.println("holita");
         while (true) {
             try {
-                Thread.sleep(1);
+                Thread.sleep(20000);
             }catch (InterruptedException err){
                 System.out.println(err.getMessage());
             }
@@ -27,6 +27,7 @@ public class Banca extends Thread{
 
 
     }
+    public void comprobarApuestas(){}
 
     public Integer getDinero() {
         return dinero;
@@ -38,5 +39,11 @@ public class Banca extends Thread{
 
     public Ruleta getRuleta() {
         return ruleta;
+    }
+    public void sumarDinero(Integer dinero){
+        this.dinero += dinero;
+    }
+    public void restarDinero(Integer dinero){
+        this.dinero-=dinero;
     }
 }

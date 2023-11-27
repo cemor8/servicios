@@ -1,34 +1,14 @@
 public class Apuesta {
-    private Integer numero;
-    private String posicion;
-    private String color;
-    private Integer bloque;
+    private String propiedadApostada;
+    private String valor;
     private int precio;
     private Jugador jugador;
 
-    public Apuesta(int numero, String posicion, String color, int bloque, int precio, Jugador jugador) {
-        this.numero = numero;
-        this.posicion = posicion;
-        this.color = color;
-        this.bloque = bloque;
+    public Apuesta(String propiedadApostada, String valor, int precio, Jugador jugador) {
+        this.propiedadApostada = propiedadApostada;
+        this.valor = valor;
         this.precio = precio;
-        this.jugador=jugador;
-    }
-
-    public Integer getNumero() {
-        return numero;
-    }
-
-    public String getPosicion() {
-        return posicion;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public Integer getBloque() {
-        return bloque;
+        this.jugador = jugador;
     }
 
     public int getPrecio() {
@@ -37,5 +17,23 @@ public class Apuesta {
 
     public Jugador getJugador() {
         return jugador;
+    }
+
+
+
+    public void setPrecio(int precio) {
+        this.precio = precio;
+    }
+
+    public void setJugador(Jugador jugador) {
+        this.jugador = jugador;
+    }
+
+    public String getPropiedadApostada() {
+        return propiedadApostada;
+    }
+
+    public String getValor() {
+        return valor;
     }
 }
