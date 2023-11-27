@@ -4,13 +4,15 @@ public class Apuesta {
     private String color;
     private Integer bloque;
     private int precio;
+    private Jugador jugador;
 
-    public Apuesta(int numero, String posicion, String color, int bloque, int precio) {
+    public Apuesta(int numero, String posicion, String color, int bloque, int precio, Jugador jugador) {
         this.numero = numero;
         this.posicion = posicion;
         this.color = color;
         this.bloque = bloque;
         this.precio = precio;
+        this.jugador=jugador;
     }
 
     public Integer getNumero() {
@@ -31,5 +33,9 @@ public class Apuesta {
 
     public int getPrecio() {
         return precio;
+    }
+
+    public Jugador getJugador() {
+        return jugador;
     }
 }

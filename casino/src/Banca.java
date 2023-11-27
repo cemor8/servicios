@@ -10,12 +10,21 @@ public class Banca extends Thread{
     }
     @Override
     public void run(){
-        try {
-            Thread.sleep(20000);
-        }catch (InterruptedException err){
-            System.out.println(err.getMessage());
+        System.out.println("holita");
+        while (true) {
+            try {
+                Thread.sleep(1);
+            }catch (InterruptedException err){
+                System.out.println(err.getMessage());
+            }
+            try {
+                this.mesa.girarRuleta(this);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
-        this.mesa.girarRuleta(this);
+
+
 
     }
 
