@@ -13,7 +13,7 @@ public class Banca extends Thread{
         System.out.println("holita");
         while (true) {
             try {
-                Thread.sleep(3000);
+                Thread.sleep(5000);
             }catch (InterruptedException err){
                 System.out.println(err.getMessage());
             }

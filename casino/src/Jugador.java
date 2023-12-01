@@ -89,14 +89,15 @@ public class Jugador extends Thread {
             System.out.println("6. Confirmar Apuestas");
             Integer opcion = null;
             try {
-                this.scanner.close();
                 opcion = this.scanner.nextInt();
-
+                //que esperen a que el usuario haya enviado las apuestas o que se acabe el tiempo, hacer hilo contador
             }catch (Exception err){
                 System.out.println("Error en el scanner");
+                this.scanner.close();
                 this.mesa.hacerApuesta(this,null);
                 continue;
             }
+
             switch (opcion){
                 case 1:
                     Apuesta apuesta = this.apostarNumero();
