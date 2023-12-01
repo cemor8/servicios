@@ -13,7 +13,6 @@ public class Mesa {
     public void girarRuleta(Banca banca) throws InterruptedException {
         this.sePuedeApostar=false;
         System.out.println("Tirando ruleta");
-        Thread.sleep(2000);
         Numero numero = banca.getRuleta().tirarRule();
         if(numero.getNumero() == 0){
             int cantidad_ganada = 0;
@@ -39,7 +38,6 @@ public class Mesa {
                             }else {
                                 apuesta.getJugador().sumarDinero(apuesta.getPrecio() * 2);
                             }
-
                             ganar = true;
                         }else {
                             banca.sumarDinero(apuesta.getPrecio());
@@ -103,7 +101,14 @@ public class Mesa {
     public synchronized void hacerApuesta(Jugador jugador,ArrayList<Apuesta> apuestas) throws InterruptedException {
         while (!this.sePuedeApostar){
             System.out.println(jugador.getNombre()+" no llego a tiempo y espera");
+            if (!jugador.isIa()){
+                jugador.cerrarScanner();
+            }
+            jugador.setHaLLegado(false);
             wait();
+        }
+        if(!jugador.isHaLLegado()){
+            return;
         }
 
         if(apuestas!=null){
@@ -119,7 +124,13 @@ public class Mesa {
         }
 
     }
+     // banca tiene que ser variable privada y al meter una apuesta comprobar si la puede hacer, si no , no la acepta
+    // al hacer apuesta quitar directamente dinero de jugador, luego no restar, solo sumar si gana
+    //preguntar scanner, como hacerlo para que lo pueda cerrar.
+    //como hacer para que si no hace nada, cierre el scanner y luego lo vuelva a abrir
+    //otra variable para banca comprobar dinero, que se reinicie en cada apuesta y sea el dinero que tiene, luego le vas restando a esa variable.
     public synchronized void despertar(){
         notifyAll();
     }
+
 }
