@@ -2,21 +2,21 @@ public class Apuesta {
     private String propiedadApostada;
     private String valor;
     private int precio;
-    private Jugador jugador;
+    private Participante participante;
 
-    public Apuesta(String propiedadApostada, String valor, int precio, Jugador jugador) {
+    public Apuesta(String propiedadApostada, String valor, int precio, Participante jugador) {
         this.propiedadApostada = propiedadApostada;
         this.valor = valor;
         this.precio = precio;
-        this.jugador = jugador;
+        this.participante = jugador;
     }
 
     public int getPrecio() {
         return precio;
     }
 
-    public Jugador getJugador() {
-        return jugador;
+    public Participante getParticipante() {
+        return participante;
     }
 
 
@@ -25,8 +25,8 @@ public class Apuesta {
         this.precio = precio;
     }
 
-    public void setJugador(Jugador jugador) {
-        this.jugador = jugador;
+    public void setJugador(Participante jugador) {
+        this.participante = jugador;
     }
 
     public String getPropiedadApostada() {
@@ -35,5 +35,14 @@ public class Apuesta {
 
     public String getValor() {
         return valor;
+    }
+
+    @Override
+    public String toString() {
+        return "Apuesta{" +
+                "propiedadApostada='" + propiedadApostada + '\'' +
+                ", valor='" + valor + '\'' +
+                ", precio=" + precio +
+                '}';
     }
 }
