@@ -23,7 +23,7 @@ public class Ruleta {
             if(i<=36/2){
                 bloque=1;
             }
-            this.listaNumeros.add(new Numero(i,color,bloque));
+            this.listaNumeros.add(new Numero(i,color,String.valueOf(bloque)));
 
         }
     }

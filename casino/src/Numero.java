@@ -1,9 +1,9 @@
 public class Numero {
     private int numero;
     private String color;
-    private Integer bloque;
+    private String bloque;
 
-    public Numero(int numero, String color, Integer bloque) {
+    public Numero(int numero, String color, String bloque) {
         this.numero = numero;
         this.color = color;
         this.bloque = bloque;
@@ -17,7 +17,7 @@ public class Numero {
         return color;
     }
 
-    public int getBloque() {
+    public String getBloque() {
         return bloque;
     }
 

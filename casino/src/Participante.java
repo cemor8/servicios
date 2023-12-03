@@ -5,9 +5,7 @@ public class Participante {
     protected String nombre;
     protected Integer dineroInicial;
     protected Integer dineroAcumulado;
-    private Mesa mesa;
     private boolean haApostado = false;
-    private ArrayList<Apuesta> apuestas = new ArrayList<>();
 
     public Participante(String nombre, Integer dineroInicial) {
         this.nombre = nombre;
@@ -31,11 +29,10 @@ public class Participante {
         return haApostado;
     }
     public void sumarDinero(int dinero){
-        System.out.println(this.getNombre()+" gana "+dinero);
-        this.dineroAcumulado += dinero;
+        dineroAcumulado += dinero;
     }
     public void restarDinero(int dinero){
-        this.dineroAcumulado -=dinero;
+        dineroAcumulado -=dinero;
     }
 
     public void setDineroAcumulado(Integer dineroAcumulado) {

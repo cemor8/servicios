@@ -13,11 +13,14 @@ public class Banca extends Thread{
     }
     @Override
     public void run(){
-        while (!this.mesa.getJugadoresOriginales().isEmpty() && this.dinero>50) {
+        while (!this.mesa.getJugadoresOriginales().isEmpty() && this.dinero>100) {
             try {
-                Thread.sleep(5000);
+                Thread.sleep(20000);
             }catch (InterruptedException err){
                 System.out.println(err.getMessage());
+            }
+            if(this.mesa.getJugadoresOriginales().isEmpty() || this.dinero<100){
+                break;
             }
             try {
                 this.mesa.girarRuleta();
@@ -27,71 +30,142 @@ public class Banca extends Thread{
         }
         this.mesa.setSeJuega(false);
     }
+    /**
+     * Método que se encarga de comprobar las apuestas
+     * */
     public void comprobarApuestas(ArrayList<Apuesta> apuestas, Numero numeroGanador){
         this.dineroComprobar = this.dinero;
         this.validarDineroApuesta(apuestas,this.dineroComprobar);
 
         if(numeroGanador.getNumero() == 0){
+
             int cantidad_ganada = 0;
             int i = 0;
+
             while (i<apuestas.size()){
+
                 cantidad_ganada+=apuestas.get(i).getPrecio();
                 apuestas.get(i).getParticipante().setDineroAcumulado(
                         apuestas.get(i).getParticipante().getDineroAcumulado() - apuestas.get(i).getPrecio()
                 );
                 apuestas.remove(i);
+
             }
+
             this.sumarDinero(cantidad_ganada);
             System.out.println("Salio 0, gana la banca");
+
         }else {
             for(Apuesta apuesta : apuestas){
                 switch (apuesta.getPropiedadApostada()){
                     case "color", "numero":
+
                         if(numeroGanador.getColor().equalsIgnoreCase(apuesta.getValor())){
+
                             this.restarDinero(apuesta.getPrecio());
+
                             if(apuesta.getPropiedadApostada().equalsIgnoreCase("numero")){
-                                apuesta.getParticipante().sumarDinero(apuesta.getPrecio() * 36);
+
+                                if(apuesta.getParticipante() instanceof Jugador){
+
+                                    Jugador jugador = (Jugador) apuesta.getParticipante();
+                                    jugador.sumar(apuesta.getPrecio() * 36);
+                                    System.out.println(apuesta.getParticipante().getNombre()+" gana "+apuesta.getPrecio() * 36+ " apostando a numero");
+                                    continue;
+
+                                }else {
+                                    apuesta.getParticipante().sumarDinero(apuesta.getPrecio() * 36);
+                                }
+                                System.out.println(apuesta.getParticipante().getNombre()+" gana "+apuesta.getPrecio() * 36+ " apostando a numero");
                             }else {
-                                apuesta.getParticipante().sumarDinero(apuesta.getPrecio() * 2);
+
+                                if(apuesta.getParticipante() instanceof Jugador){
+
+                                    Jugador jugador = (Jugador) apuesta.getParticipante();
+                                    jugador.sumar(apuesta.getPrecio() * 2);
+                                    System.out.println(apuesta.getParticipante().getNombre()+" gana "+apuesta.getPrecio() * 2+ " apostando a color");
+                                    continue;
+
+                                }else {
+                                    apuesta.getParticipante().sumarDinero(apuesta.getPrecio() * 2);
+                                }
+
+                                System.out.println(apuesta.getParticipante().getNombre()+" gana "+apuesta.getPrecio() * 2+ " apostando a color");
                             }
-                            this.restarDinero(apuesta.getPrecio());
                         }else {
+
+                            System.out.println(apuesta.getParticipante().getNombre()+" pierde "+apuesta.getPrecio());
                             this.sumarDinero(apuesta.getPrecio());
                         }
                         break;
+
                     case "posicion":
                         String posicion = null;
+
                         if(numeroGanador.getNumero()%2 == 0){
                             posicion = "par";
                         }else{
                             posicion = "impar";
                         }
+
                         if(posicion.equalsIgnoreCase(apuesta.getValor())){
+
                             this.restarDinero(apuesta.getPrecio());
-                            apuesta.getParticipante().sumarDinero(apuesta.getPrecio() * 2);
+
+                            if(apuesta.getParticipante() instanceof Jugador){
+                                Jugador jugador = (Jugador) apuesta.getParticipante();
+                                jugador.sumar(apuesta.getPrecio() * 2);
+                                System.out.println(apuesta.getParticipante().getNombre()+" gana "+apuesta.getPrecio() * 2+ " apostando a posicion");
+                                continue;
+                            }else {
+                                apuesta.getParticipante().sumarDinero(apuesta.getPrecio() * 2);
+                            }
+
+                            System.out.println(apuesta.getParticipante().getNombre()+" gana "+apuesta.getPrecio() * 2+ " apostando a posicion");
+
                         }else {
+                            System.out.println(apuesta.getParticipante().getNombre()+" pierde "+apuesta.getPrecio());
                             this.sumarDinero(apuesta.getPrecio());
                         }
                         break;
+
                     case "bloque":
                         String bloque = null;
+
                         if(numeroGanador.getNumero()<18){
                             bloque = "1";
                         }else{
                             bloque = "2";
                         }
+
                         if(bloque.equalsIgnoreCase(apuesta.getValor())){
+
                             this.restarDinero(apuesta.getPrecio());
-                            apuesta.getParticipante().sumarDinero(apuesta.getPrecio() * 2);
+
+                            if(apuesta.getParticipante() instanceof Jugador){
+                                Jugador jugador = (Jugador) apuesta.getParticipante();
+                                jugador.sumar(apuesta.getPrecio() * 2);
+                                System.out.println(apuesta.getParticipante().getNombre()+" gana "+apuesta.getPrecio() * 2+ " apostando a bloque");
+                                continue;
+                            }else {
+                                apuesta.getParticipante().sumarDinero(apuesta.getPrecio() * 2);
+                            }
+
+                            System.out.println(apuesta.getParticipante().getNombre()+" gana "+apuesta.getPrecio() * 2+ " apostando a bloque");
                         }else {
                             this.sumarDinero(apuesta.getPrecio());
+                            System.out.println(apuesta.getParticipante().getNombre()+" pierde "+apuesta.getPrecio());
                         }
+
                         break;
                 }
             }
 
         }
     }
+    /*
+    * Método que se encarga de validar o aceptar una apuesta
+    * */
     public void validarDineroApuesta(ArrayList<Apuesta> apuestas, int dineroComprobar){
         int i = 0;
         while (i<apuestas.size()){
