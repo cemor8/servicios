@@ -27,3 +27,10 @@ solo puedes apostar si tienes dinero
 -pasar se pueden pasar
 
 si sale 0 se queda el dinero la banca
+
+
+entorno y marco de datos
+
+overhead carga adicional
+
+no hay problema al leer el mismo archivo dos procesos
