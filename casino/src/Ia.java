@@ -17,16 +17,14 @@ public class Ia extends Participante implements Runnable{
             if(!this.mesa.isSePuedeApostar()){
                 continue;
             }
-            int numeroAleatorio = (int) (Math.random() * 16) + 7;
+            int numeroAleatorio = (int) (Math.random() * 15) + 20;
             numeroAleatorio*=1000;
-            /*
             try {
                 Thread.sleep(numeroAleatorio);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
 
-             */
             System.out.println(this.nombre+" dinero: "+this.dineroAcumulado);
             this.apuestas = new ArrayList<>();
             double aleatorio = Math.random();
@@ -59,6 +57,9 @@ public class Ia extends Participante implements Runnable{
         System.out.println(this.nombre+" acabo de apostar en la rule");
         this.mesa.eliminarOriginal(this);
     }
+    /**
+     * Método que se encarga de generar una apuesta para la ia.
+     * */
     private void hacerApuesta(String propieadApostar , String valorApostar, ArrayList<Apuesta> apuestas){
         ArrayList<Integer> posiblesCantidades= new ArrayList<>(List.of(25,50,100,150,200,250,400,500,1000));
         if(this.dineroAcumulado<=0){

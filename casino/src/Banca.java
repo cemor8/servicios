@@ -15,7 +15,7 @@ public class Banca extends Thread{
     public void run(){
         while (!this.mesa.getJugadoresOriginales().isEmpty() && this.dinero>100) {
             try {
-                Thread.sleep(20000);
+                Thread.sleep(30000);
             }catch (InterruptedException err){
                 System.out.println(err.getMessage());
             }
