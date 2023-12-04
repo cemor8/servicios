@@ -29,7 +29,7 @@ public class Jugador extends Participante {
     public void menu() throws InterruptedException {
 
         while (this.dineroAcumulado <= this.dineroInicial * 4 && this.mesa.isSeJuega()) {
-            
+
             System.out.println("1. Apostar Numero");
             System.out.println("2. Apostar Color");
             System.out.println("3. Apostar Posicion");
