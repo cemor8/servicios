@@ -28,12 +28,7 @@ public class Participante {
     public boolean isHaApostado() {
         return haApostado;
     }
-    public void sumarDinero(int dinero){
-        dineroAcumulado += dinero;
-    }
-    public void restarDinero(int dinero){
-        dineroAcumulado -=dinero;
-    }
+
 
     public void setDineroAcumulado(Integer dineroAcumulado) {
         this.dineroAcumulado = dineroAcumulado;

@@ -6,7 +6,6 @@ public class Jugador extends Participante {
     private Integer dineroAcumulado;
     private Mesa mesa;
     private boolean haApostado = false;
-    private boolean haLLegado = true;
     private Scanner scanner = null;
     private ArrayList<Apuesta> apuestas = new ArrayList<>();
     private ArrayList<Integer> cantidades = new ArrayList<>(List.of(100,200,300,400,500));
@@ -100,7 +99,6 @@ public class Jugador extends Participante {
                     System.out.println(this.dineroAcumulado);
                     break;
                 default:
-                    continue;
             }
 
         }

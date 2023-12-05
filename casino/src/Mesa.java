@@ -27,30 +27,18 @@ public class Mesa {
 
         int i = 0;
         while (i < this.jugadoresEnMesa.size()) {
+
             this.jugadoresEnMesa.get(i).setHaApostado(false);
-            /*
-            System.out.println("\nJugador : "+jugadoresEnMesa.get(i).getNombre());
-            System.out.println("\t Dinero : "+jugadoresEnMesa.get(i).getDineroAcumulado());
-
-             */
             this.jugadoresEnMesa.remove(i);
-
         }
         this.sePuedeApostar=true;
         notifyAll();
     }
     /*
      * Método que llama la ia para realizar una apuesta
+     *
      * */
     public synchronized void hacerApuesta(Participante participante,ArrayList<Apuesta> apuestas) throws InterruptedException {
-        /*
-        while (!this.sePuedeApostar){
-            System.out.println(participante.getNombre()+" no llego a tiempo y espera");
-            wait();
-        }
-
-         */
-
         participante.setHaApostado(true);
         jugadoresEnMesa.add(participante);
 
@@ -67,6 +55,7 @@ public class Mesa {
     }
     /*
     * Método que llama el jugador por terminal para introducir una apuesta
+    *
     * */
     public void apostar(Participante participante, ArrayList<Apuesta> apuestas){
         if (!this.sePuedeApostar){
@@ -81,12 +70,6 @@ public class Mesa {
             System.out.println("El jugador "+participante.getNombre()+" pasa");
         }
     }
-
-    // banca tiene que ser variable privada y al meter una apuesta comprobar si la puede hacer, si no , no la acepta
-    // al hacer apuesta quitar directamente dinero de jugador, luego no restar, solo sumar si gana
-    //preguntar scanner, como hacerlo para que lo pueda cerrar.
-    //como hacer para que si no hace nada, cierre el scanner y luego lo vuelva a abrir
-    //otra variable para banca comprobar dinero, que se reinicie en cada apuesta y sea el dinero que tiene, luego le vas restando a esa variable.
 
     public ArrayList<Participante> getJugadoresOriginales() {
         return jugadoresOriginales;

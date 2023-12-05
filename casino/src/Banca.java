@@ -15,7 +15,7 @@ public class Banca extends Thread{
     public void run(){
         while (!this.mesa.getJugadoresOriginales().isEmpty() && this.dinero>100) {
             try {
-                Thread.sleep(30000);
+                Thread.sleep(3000);
             }catch (InterruptedException err){
                 System.out.println(err.getMessage());
             }
@@ -74,7 +74,8 @@ public class Banca extends Thread{
                                     continue;
 
                                 }else {
-                                    apuesta.getParticipante().sumarDinero(apuesta.getPrecio() * 36);
+                                    Ia ia =(Ia) apuesta.getParticipante();
+                                    ia.sumarDinero(apuesta.getPrecio() * 36);
                                 }
                                 System.out.println(apuesta.getParticipante().getNombre()+" gana "+apuesta.getPrecio() * 36+ " apostando a numero");
                             }else {
@@ -87,7 +88,8 @@ public class Banca extends Thread{
                                     continue;
 
                                 }else {
-                                    apuesta.getParticipante().sumarDinero(apuesta.getPrecio() * 2);
+                                    Ia ia =(Ia) apuesta.getParticipante();
+                                    ia.sumarDinero(apuesta.getPrecio() * 2);
                                 }
 
                                 System.out.println(apuesta.getParticipante().getNombre()+" gana "+apuesta.getPrecio() * 2+ " apostando a color");
@@ -118,7 +120,8 @@ public class Banca extends Thread{
                                 System.out.println(apuesta.getParticipante().getNombre()+" gana "+apuesta.getPrecio() * 2+ " apostando a posicion");
                                 continue;
                             }else {
-                                apuesta.getParticipante().sumarDinero(apuesta.getPrecio() * 2);
+                                Ia ia =(Ia) apuesta.getParticipante();
+                                ia.sumarDinero(apuesta.getPrecio() * 2);
                             }
 
                             System.out.println(apuesta.getParticipante().getNombre()+" gana "+apuesta.getPrecio() * 2+ " apostando a posicion");
@@ -148,7 +151,8 @@ public class Banca extends Thread{
                                 System.out.println(apuesta.getParticipante().getNombre()+" gana "+apuesta.getPrecio() * 2+ " apostando a bloque");
                                 continue;
                             }else {
-                                apuesta.getParticipante().sumarDinero(apuesta.getPrecio() * 2);
+                                Ia ia =(Ia) apuesta.getParticipante();
+                                ia.sumarDinero(apuesta.getPrecio() * 2);
                             }
 
                             System.out.println(apuesta.getParticipante().getNombre()+" gana "+apuesta.getPrecio() * 2+ " apostando a bloque");

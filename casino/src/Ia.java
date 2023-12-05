@@ -12,36 +12,36 @@ public class Ia extends Participante implements Runnable{
     }
     @Override
     public void run() {
-
         while (this.dineroAcumulado>50 && this.dineroAcumulado < this.dineroInicial*4 && this.mesa.isSeJuega()) {
+
             if(!this.mesa.isSePuedeApostar()){
                 continue;
             }
             int numeroAleatorio = (int) (Math.random() * 15) + 20;
             numeroAleatorio*=1000;
+
             try {
                 Thread.sleep(numeroAleatorio);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
+            System.out.println(this.nombre+": "+this.dineroAcumulado+" euros");
 
-            System.out.println(this.nombre+" dinero: "+this.dineroAcumulado);
             this.apuestas = new ArrayList<>();
             double aleatorio = Math.random();
             if (aleatorio < 0.7) {
-                ArrayList<Apuesta> apuestas = new ArrayList<>();
                 aleatorio = (int) (Math.random() * 37);
                 if (aleatorio!= 0 ){
-                    this.hacerApuesta("numero",String.valueOf(aleatorio),apuestas);
+                    this.hacerApuesta("numero",String.valueOf(aleatorio),this.apuestas);
                 }
-                this.hacerApuesta("posicion","par",apuestas);
-                this.hacerApuesta("posicion","impar",apuestas);
-                this.hacerApuesta("color","rojo",apuestas);
-                this.hacerApuesta("color","negro",apuestas);
-                this.hacerApuesta("bloque","1",apuestas);
-                this.hacerApuesta("bloque","2",apuestas);
+                this.hacerApuesta("posicion","par",this.apuestas);
+                this.hacerApuesta("posicion","impar",this.apuestas);
+                this.hacerApuesta("color","rojo",this.apuestas);
+                this.hacerApuesta("color","negro",this.apuestas);
+                this.hacerApuesta("bloque","1",this.apuestas);
+                this.hacerApuesta("bloque","2",this.apuestas);
                 try {
-                    this.mesa.hacerApuesta(this,apuestas);
+                    this.mesa.hacerApuesta(this,this.apuestas);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
@@ -83,6 +83,9 @@ public class Ia extends Participante implements Runnable{
             apuestas.add(new Apuesta(propieadApostar,valorApostar,precio,this));
             this.dineroAcumulado-=precio;
         }
+    }
+    public void sumarDinero(int dinero){
+        this.dineroAcumulado += dinero;
     }
 
 }
